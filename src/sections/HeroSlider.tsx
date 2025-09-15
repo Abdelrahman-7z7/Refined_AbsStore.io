@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { motion, AnimatePresence } from 'framer-motion';
 
 interface HeroSlide {
   id: string;
@@ -16,6 +17,7 @@ interface HeroSlide {
 const HeroSlider: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState<number>(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState<boolean>(true);
+  const [direction, setDirection] = useState<'left' | 'right'>('right');
 
 const heroSlides: HeroSlide[] = [
   {
@@ -62,45 +64,104 @@ const heroSlides: HeroSlide[] = [
     if (!isAutoPlaying) return;
 
     const interval = setInterval(() => {
+      setDirection('left');
       setCurrentSlide((prev) => (prev + 1) % totalSlides);
-      }, 5000);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, [currentSlide, isAutoPlaying, totalSlides]);
 
+  const goToNext = () => {
+    setDirection('left');
+    setCurrentSlide((prev) => (prev + 1) % totalSlides);
+    setIsAutoPlaying(false);
+    setTimeout(() => setIsAutoPlaying(true), 3000);
+  };
+
+  const goToPrevious = () => {
+    setDirection('right');
+    setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
+    setIsAutoPlaying(false);
+    setTimeout(() => setIsAutoPlaying(true), 3000);
+  };
+
+  const goToSlide = (index: number) => {
+    setDirection(index > currentSlide ? 'right' : 'left');
+    setCurrentSlide(index);
+    setIsAutoPlaying(false);
+    setTimeout(() => setIsAutoPlaying(true), 3000);
+  };
+
+  const handleCtaClick = (link: string) => {
+    if (link.startsWith('#')) {
+      const element = document.querySelector(link);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
   const current = heroSlides[currentSlide];
 
   return (
-    <div className="relative w-full overflow-hidden bg-green-500" style={{ height: 'calc(100vh - 80px)' }}>
+    <div className="relative w-full overflow-hidden bg-black" style={{ height: 'calc(100vh - 80px)' }}>
 
-      {/* Background Image */}
-      <div className="absolute inset-0 bg-blue-500">
-                <Image
-          src={current.backgroundImage}
-          alt={current.title}
-                  fill
-                  priority={currentSlide === 0}
-          sizes="100vw"
-          style={{
-            objectFit: 'cover',
-            opacity: 1,
-            transition: 'opacity 0.7s ease-in-out',
-          }}
-          className="transition-opacity duration-700 ease-in-out"
-          onLoad={() => console.log('✅ HeroSlider image loaded for slide', currentSlide)}
-          onError={(e) => console.log('❌ HeroSlider image failed for slide', currentSlide, e)}
-        />
-            </div>
+      {/* Background Image with Directional Fade */}
+      <div className="absolute inset-0 bg-black">
+        <AnimatePresence mode="popLayout">
+          <motion.div
+            key={currentSlide}
+            initial={{ 
+              opacity: 0, 
+              x: direction === 'right' ? 50 : -50 
+            }}
+            animate={{ 
+              opacity: 1, 
+              x: 0 
+            }}
+            exit={{ 
+              opacity: 0, 
+              x: direction === 'right' ? -50 : 50 
+            }}
+            transition={{ duration: 0.6, ease: "easeInOut" }}
+            className="absolute inset-0"
+          >
+            <Image
+              src={current.backgroundImage}
+              alt={current.title}
+              fill
+              priority={currentSlide === 0}
+              sizes="100vw"
+              style={{
+                objectFit: 'cover',
+              }}
+              onLoad={() => console.log('✅ HeroSlider image loaded for slide', currentSlide)}
+              onError={(e) => console.log('❌ HeroSlider image failed for slide', currentSlide, e)}
+            />
+          </motion.div>
+        </AnimatePresence>
+      </div>
 
       {/* Very Light Transparent Overlay */}
       {current?.overlay && (
         <div className="absolute inset-0 bg-black/55 z-10"></div>
       )}
 
+      {/* Content - Centered with same z-index as navigation */}
+      <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center text-white z-20">
+        <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">{current.title}</h1>
+        <p className="text-lg md:text-xl mb-8 max-w-2xl opacity-90">{current.subtitle}</p>
+        <button
+          onClick={() => handleCtaClick(current.ctaLink)}
+          className="px-8 py-3 bg-white text-gray-900 font-semibold rounded-lg shadow-md hover:bg-gray-100 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white"
+        >
+          {current.ctaText}
+        </button>
+      </div>
 
       {/* Navigation Arrows */}
       <button
-        onClick={() => setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides)}
+        onClick={goToPrevious}
         className="absolute left-6 top-1/2 transform -translate-y-1/2 bg-gray-800 bg-opacity-70 hover:bg-opacity-100 text-white p-3 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white z-20"
         aria-label="Previous slide"
       >
@@ -110,7 +171,7 @@ const heroSlides: HeroSlide[] = [
       </button>
 
       <button
-        onClick={() => setCurrentSlide((prev) => (prev + 1) % totalSlides)}
+        onClick={goToNext}
         className="absolute right-6 top-1/2 transform -translate-y-1/2 bg-gray-800 bg-opacity-70 hover:bg-opacity-100 text-white p-3 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white z-20"
         aria-label="Next slide"
       >
@@ -124,7 +185,7 @@ const heroSlides: HeroSlide[] = [
         {heroSlides.map((_, index) => (
           <button
             key={index}
-            onClick={() => setCurrentSlide(index)}
+            onClick={() => goToSlide(index)}
             className={`w-3 h-3 rounded-full transition-all duration-300 border-2 ${
               index === currentSlide 
                 ? 'bg-white border-white scale-125 shadow-lg' 
