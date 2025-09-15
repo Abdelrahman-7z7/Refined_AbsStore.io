@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-gray-50">
       {/* Hero Slider Section */}
-      <section className="relative z-10">
+      <section className="relative z-10 h-screen">
         <HeroSlider />
       </section>
       

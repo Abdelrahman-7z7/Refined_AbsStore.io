@@ -100,3 +100,18 @@ body {
 .bg-contact-gradient {
   background: linear-gradient(90deg, rgba(225,212,187,1) 45%, rgba(227,227,227,1) 77%);
 }
+
+.slide-enter {
+  opacity: 0;
+}
+.slide-enter-active {
+  opacity: 1;
+  transition: opacity 700ms ease-in-out;
+}
+.slide-exit {
+  opacity: 1;
+}
+.slide-exit-active {
+  opacity: 0;
+  transition: opacity 700ms ease-in-out;
+}
