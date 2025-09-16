@@ -101,25 +101,27 @@ export default function Navbar() {
       className="sticky top-0 z-50 bg-black backdrop-blur-sm border-b border-gray-800 shadow-lg"
     >
       <div className="container-custom">
-        <div className="flex items-center justify-between h-20 px-4 sm:px-6">
+        <div className="grid grid-cols-3 items-center h-20 px-4 sm:px-6">
           {/* Left Side - Logo */}
-          <motion.button
-            onClick={() => router.push('/')}
-            className="flex items-center space-x-2 sm:space-x-3 hover:opacity-80 transition-opacity duration-200"
-            whileHover={{ x: 5 }}
-            transition={{ duration: 0.2, ease: "easeOut" }}
-          >
-            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-[#369e62] rounded-lg flex items-center justify-center">
-              <svg className="w-4 h-4 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z" />
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5a2 2 0 012-2h4a2 2 0 012 2v2H8V5z" />
-              </svg>
-            </div>
-            <span className="text-lg sm:text-xl md:text-2xl font-bold text-white tracking-tight">AbsStore</span>
-          </motion.button>
+          <div className="flex justify-start">
+            <motion.button
+              onClick={() => router.push('/')}
+              className="flex items-center space-x-2 sm:space-x-3 hover:opacity-80 transition-opacity duration-200"
+              whileHover={{ x: 5 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+            >
+              <div className="w-8 h-8 sm:w-10 sm:h-10 bg-[#369e62] rounded-lg flex items-center justify-center">
+                <svg className="w-4 h-4 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5a2 2 0 012-2h4a2 2 0 012 2v2H8V5z" />
+                </svg>
+              </div>
+              <span className="text-lg sm:text-xl md:text-2xl font-bold text-white tracking-tight">AbsStore</span>
+            </motion.button>
+          </div>
 
           {/* Center - Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8 lg:space-x-10">
+          <div className="hidden md:flex items-center justify-center space-x-8 lg:space-x-10">
             {navigationLinks.map((link) => (
               <button
                 key={link.label}
@@ -133,7 +135,7 @@ export default function Navbar() {
           </div>
 
           {/* Right Side - Cart and Menu */}
-          <div className="flex items-center space-x-1 sm:space-x-2">
+          <div className="flex items-center justify-end space-x-1 sm:space-x-2">
             {/* Cart Icon */}
             <motion.button
               onClick={handleCartClick}
