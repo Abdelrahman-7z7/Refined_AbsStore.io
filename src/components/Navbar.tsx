@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useToggle } from '@/hooks/useToggle';
 import { useCart } from '@/hooks/useCart';
+import { useAuth } from '@/hooks/useAuth';
 import { NavLink } from '@/types/navigation';
 
 const navigationLinks: NavLink[] = [
@@ -17,7 +18,9 @@ const navigationLinks: NavLink[] = [
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [showUserMenu, setShowUserMenu] = useState(false);
   const { getTotalQuantity } = useCart();
+  const { user, logout } = useAuth();
   const cartItemCount = getTotalQuantity();
   const router = useRouter();
 
@@ -52,6 +55,23 @@ export default function Navbar() {
       window.removeEventListener('hashchange', handleHashNavigation);
     };
   }, []);
+
+  // Close user menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (showUserMenu) {
+        const target = event.target as Element;
+        if (!target.closest('.user-menu-container')) {
+          setShowUserMenu(false);
+        }
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showUserMenu]);
 
   const handleLinkClick = (link: NavLink) => {
     // Close mobile menu after click
@@ -91,6 +111,13 @@ export default function Navbar() {
     // Close mobile menu after click
     setIsMobileMenuOpen(false);
     router.push('/cart');
+  };
+
+  const handleLogout = () => {
+    logout();
+    setShowUserMenu(false);
+    setIsMobileMenuOpen(false);
+    router.push('/');
   };
 
   return (
@@ -134,8 +161,95 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* Right Side - Cart and Menu */}
+          {/* Right Side - Auth, Cart and Menu */}
           <div className="flex items-center justify-end space-x-1 sm:space-x-2">
+            {/* Authentication Buttons - Desktop */}
+            <div className="hidden md:flex items-center space-x-2">
+              {user ? (
+                /* User Menu */
+                <div className="relative user-menu-container">
+                  <motion.button
+                    onClick={() => setShowUserMenu(!showUserMenu)}
+                    className="flex items-center space-x-2 p-2 text-white hover:text-gray-300 transition-colors duration-200 rounded-lg hover:bg-gray-800/50 cursor-pointer"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <div className="w-8 h-8 bg-[#369e62] rounded-full flex items-center justify-center">
+                      <span className="text-sm font-semibold text-white">
+                        {user.firstName.charAt(0)}{user.lastName.charAt(0)}
+                      </span>
+                    </div>
+                    <span className="text-sm font-medium">{user.firstName}</span>
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </motion.button>
+
+                  {/* User Dropdown Menu */}
+                  <AnimatePresence>
+                    {showUserMenu && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        transition={{ duration: 0.2 }}
+                        className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50"
+                      >
+                        <div className="px-4 py-2 border-b border-gray-100">
+                          <p className="text-sm font-medium text-gray-900">{user.firstName} {user.lastName}</p>
+                          <p className="text-xs text-gray-500">{user.email}</p>
+                        </div>
+                        <button
+                          onClick={() => {
+                            setShowUserMenu(false);
+                            router.push('/profile');
+                          }}
+                          className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors duration-200"
+                        >
+                          Profile
+                        </button>
+                        <button
+                          onClick={() => {
+                            setShowUserMenu(false);
+                            router.push('/orders');
+                          }}
+                          className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors duration-200"
+                        >
+                          Orders
+                        </button>
+                        <button
+                          onClick={handleLogout}
+                          className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors duration-200"
+                        >
+                          Sign Out
+                        </button>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              ) : (
+                /* Login/Register Buttons */
+                <div className="flex items-center space-x-2">
+                  <motion.button
+                    onClick={() => router.push('/login')}
+                    className="text-white hover:text-gray-300 font-medium text-sm transition-colors duration-200 px-3 py-2 rounded-lg hover:bg-gray-800/50 cursor-pointer"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    Sign In
+                  </motion.button>
+                  <motion.button
+                    onClick={() => router.push('/register')}
+                    className="bg-[#369e62] text-white hover:bg-[#008000] font-medium text-sm transition-colors duration-200 px-4 py-2 rounded-lg cursor-pointer"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    Sign Up
+                  </motion.button>
+                </div>
+              )}
+            </div>
+
             {/* Cart Icon */}
             <motion.button
               onClick={handleCartClick}
@@ -213,6 +327,63 @@ export default function Navbar() {
                     {link.label}
                   </button>
                 ))}
+
+                {/* Mobile Authentication */}
+                {user ? (
+                  /* Mobile User Menu */
+                  <div className="border-t border-gray-700 pt-3 mt-3">
+                    <div className="px-4 py-2 mb-3">
+                      <p className="text-sm font-medium text-white">{user.firstName} {user.lastName}</p>
+                      <p className="text-xs text-gray-400">{user.email}</p>
+                    </div>
+                    <button
+                      onClick={() => {
+                        setIsMobileMenuOpen(false);
+                        router.push('/profile');
+                      }}
+                      className="block w-full text-left px-4 py-3 text-white hover:text-gray-300 hover:bg-gray-800/50 rounded-lg transition-colors duration-200 font-medium cursor-pointer"
+                    >
+                      Profile
+                    </button>
+                    <button
+                      onClick={() => {
+                        setIsMobileMenuOpen(false);
+                        router.push('/orders');
+                      }}
+                      className="block w-full text-left px-4 py-3 text-white hover:text-gray-300 hover:bg-gray-800/50 rounded-lg transition-colors duration-200 font-medium cursor-pointer"
+                    >
+                      Orders
+                    </button>
+                    <button
+                      onClick={handleLogout}
+                      className="block w-full text-left px-4 py-3 text-red-400 hover:text-red-300 hover:bg-red-900/20 rounded-lg transition-colors duration-200 font-medium cursor-pointer"
+                    >
+                      Sign Out
+                    </button>
+                  </div>
+                ) : (
+                  /* Mobile Login/Register Buttons */
+                  <div className="border-t border-gray-700 pt-3 mt-3 space-y-2">
+                    <button
+                      onClick={() => {
+                        setIsMobileMenuOpen(false);
+                        router.push('/login');
+                      }}
+                      className="block w-full text-left px-4 py-3 text-white hover:text-gray-300 hover:bg-gray-800/50 rounded-lg transition-colors duration-200 font-medium cursor-pointer"
+                    >
+                      Sign In
+                    </button>
+                    <button
+                      onClick={() => {
+                        setIsMobileMenuOpen(false);
+                        router.push('/register');
+                      }}
+                      className="block w-full text-center px-4 py-3 bg-[#369e62] text-white hover:bg-[#008000] rounded-lg transition-colors duration-200 font-medium cursor-pointer"
+                    >
+                      Sign Up
+                    </button>
+                  </div>
+                )}
                 
                 {/* Mobile Cart Button */}
                 <button
