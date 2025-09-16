@@ -88,6 +88,8 @@ export default function Navbar() {
   };
 
   const handleCartClick = () => {
+    // Close mobile menu after click
+    setIsMobileMenuOpen(false);
     router.push('/cart');
   };
 
@@ -99,27 +101,25 @@ export default function Navbar() {
       className="sticky top-0 z-50 bg-black backdrop-blur-sm border-b border-gray-800 shadow-lg"
     >
       <div className="container-custom">
-        <div className="grid grid-cols-3 items-center h-20 px-4 sm:px-6">
+        <div className="flex items-center justify-between h-20 px-4 sm:px-6">
           {/* Left Side - Logo */}
-          <div className="flex justify-start">
-            <motion.button
-              onClick={() => router.push('/')}
-              className="flex items-center space-x-2 sm:space-x-3 hover:opacity-80 transition-opacity duration-200"
-              whileHover={{ x: 5 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-            >
-              <div className="w-8 h-8 sm:w-10 sm:h-10 bg-[#369e62] rounded-lg flex items-center justify-center">
-                <svg className="w-4 h-4 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5a2 2 0 012-2h4a2 2 0 012 2v2H8V5z" />
-                </svg>
-              </div>
-              <span className="text-lg sm:text-xl md:text-2xl font-bold text-white tracking-tight">AbsStore</span>
-            </motion.button>
-          </div>
+          <motion.button
+            onClick={() => router.push('/')}
+            className="flex items-center space-x-2 sm:space-x-3 hover:opacity-80 transition-opacity duration-200"
+            whileHover={{ x: 5 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+          >
+            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-[#369e62] rounded-lg flex items-center justify-center">
+              <svg className="w-4 h-4 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5a2 2 0 012-2h4a2 2 0 012 2v2H8V5z" />
+              </svg>
+            </div>
+            <span className="text-lg sm:text-xl md:text-2xl font-bold text-white tracking-tight">AbsStore</span>
+          </motion.button>
 
           {/* Center - Desktop Navigation */}
-          <div className="hidden md:flex items-center justify-center space-x-8 lg:space-x-10">
+          <div className="hidden md:flex items-center space-x-8 lg:space-x-10">
             {navigationLinks.map((link) => (
               <button
                 key={link.label}
@@ -133,17 +133,17 @@ export default function Navbar() {
           </div>
 
           {/* Right Side - Cart and Menu */}
-          <div className="flex items-center justify-end space-x-2 sm:space-x-4">
+          <div className="flex items-center space-x-1 sm:space-x-2">
             {/* Cart Icon */}
             <motion.button
               onClick={handleCartClick}
-              className="relative p-2 sm:p-3 text-white hover:text-gray-300 transition-colors duration-200 rounded-lg hover:bg-gray-800/50"
+              className="relative p-2 sm:p-3 text-white hover:text-gray-300 transition-colors duration-200 rounded-lg hover:bg-gray-800/50 flex items-center justify-center"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               transition={{ duration: 0.15, ease: "easeOut" }}
             >
             <svg
-              className="w-6 h-6 sm:w-7 sm:h-7"
+              className="w-5 h-5 sm:w-6 sm:h-6"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -178,14 +178,14 @@ export default function Navbar() {
             {/* Mobile Menu Button */}
             <button
               onClick={toggleMobileMenu}
-              className="md:hidden p-2 sm:p-3 text-white hover:text-gray-300 transition-colors duration-200 rounded-lg hover:bg-gray-800/50"
+              className="md:hidden p-2 sm:p-3 text-white hover:text-gray-300 transition-colors duration-200 rounded-lg hover:bg-gray-800/50 flex items-center justify-center"
             >
               <Image
                 src="/assets/main-menu.png"
                 alt="Menu"
                 width={20}
                 height={20}
-                className="object-contain sm:w-[22px] sm:h-[22px]"
+                className="object-contain w-5 h-5 sm:w-[22px] sm:h-[22px]"
               />
             </button>
           </div>
@@ -215,29 +215,36 @@ export default function Navbar() {
                 {/* Mobile Cart Button */}
                 <button
                   onClick={handleCartClick}
-                  className="flex items-center space-x-3 w-full text-left px-4 py-3 text-white hover:text-gray-300 hover:bg-gray-800/50 rounded-lg transition-colors duration-200 font-medium"
+                  className="flex items-center justify-between w-full text-left px-4 py-3 text-white hover:text-gray-300 hover:bg-gray-800/50 rounded-lg transition-colors duration-200 font-medium"
                 >
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={1.5}
-                      d="M16 11V7a4 4 0 00-8 0v4M5 9h14l-1 7a2 2 0 01-2 2H8a2 2 0 01-2-2L5 9z"
-                    />
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={1.5}
-                      d="M9 11v6M15 11v6"
-                    />
-                  </svg>
-                  <span>Cart ({cartItemCount})</span>
+                  <div className="flex items-center space-x-3">
+                    <svg
+                      className="w-5 h-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={1.5}
+                        d="M16 11V7a4 4 0 00-8 0v4M5 9h14l-1 7a2 2 0 01-2 2H8a2 2 0 01-2-2L5 9z"
+                      />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={1.5}
+                        d="M9 11v6M15 11v6"
+                      />
+                    </svg>
+                    <span>Cart</span>
+                  </div>
+                  {cartItemCount > 0 && (
+                    <span className="bg-red-500 text-white text-xs font-semibold rounded-full w-5 h-5 flex items-center justify-center">
+                      {cartItemCount}
+                    </span>
+                  )}
                 </button>
               </div>
             </motion.div>
