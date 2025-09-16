@@ -106,7 +106,7 @@ export default function Navbar() {
           <div className="flex justify-start">
             <motion.button
               onClick={() => router.push('/')}
-              className="flex items-center space-x-2 sm:space-x-3 hover:opacity-80 transition-opacity duration-200"
+              className="flex items-center space-x-2 sm:space-x-3 hover:opacity-80 transition-opacity duration-200 cursor-pointer"
               whileHover={{ x: 5 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
             >
@@ -126,7 +126,7 @@ export default function Navbar() {
               <button
                 key={link.label}
                 onClick={() => handleLinkClick(link)}
-                className="relative text-white hover:text-gray-300 font-medium text-sm lg:text-base transition-colors duration-200 group px-3 py-2 rounded-md"
+                className="relative text-white hover:text-gray-300 font-medium text-sm lg:text-base transition-colors duration-200 group px-3 py-2 rounded-md cursor-pointer"
               >
                 {link.label}
                 <div className="absolute -bottom-1 left-3 right-3 h-0.5 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform duration-200 origin-left" />
@@ -139,7 +139,7 @@ export default function Navbar() {
             {/* Cart Icon */}
             <motion.button
               onClick={handleCartClick}
-              className="relative p-2 sm:p-3 text-white hover:text-gray-300 transition-colors duration-200 rounded-lg hover:bg-gray-800/50 flex items-center justify-center"
+              className="relative p-2 sm:p-3 text-white hover:text-gray-300 transition-colors duration-200 rounded-lg hover:bg-gray-800/50 flex items-center justify-center cursor-pointer"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               transition={{ duration: 0.15, ease: "easeOut" }}
@@ -180,7 +180,7 @@ export default function Navbar() {
             {/* Mobile Menu Button */}
             <button
               onClick={toggleMobileMenu}
-              className="md:hidden p-2 sm:p-3 text-white hover:text-gray-300 transition-colors duration-200 rounded-lg hover:bg-gray-800/50 flex items-center justify-center"
+              className="md:hidden p-2 sm:p-3 text-white hover:text-gray-300 transition-colors duration-200 rounded-lg hover:bg-gray-800/50 flex items-center justify-center cursor-pointer"
             >
               <Image
                 src="/assets/main-menu.png"
@@ -208,7 +208,7 @@ export default function Navbar() {
                   <button
                     key={link.label}
                     onClick={() => handleLinkClick(link)}
-                    className="block w-full text-left px-4 py-3 text-white hover:text-gray-300 hover:bg-gray-800/50 rounded-lg transition-colors duration-200 font-medium"
+                    className="block w-full text-left px-4 py-3 text-white hover:text-gray-300 hover:bg-gray-800/50 rounded-lg transition-colors duration-200 font-medium cursor-pointer"
                   >
                     {link.label}
                   </button>
@@ -217,7 +217,7 @@ export default function Navbar() {
                 {/* Mobile Cart Button */}
                 <button
                   onClick={handleCartClick}
-                  className="flex items-center justify-between w-full text-left px-4 py-3 text-white hover:text-gray-300 hover:bg-gray-800/50 rounded-lg transition-colors duration-200 font-medium"
+                  className="flex items-center justify-between w-full text-left px-4 py-3 text-white hover:text-gray-300 hover:bg-gray-800/50 rounded-lg transition-colors duration-200 font-medium cursor-pointer"
                 >
                   <div className="flex items-center space-x-3">
                     <svg

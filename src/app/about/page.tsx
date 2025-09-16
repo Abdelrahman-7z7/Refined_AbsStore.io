@@ -103,7 +103,7 @@ export default function AboutPage() {
               >
                 <motion.button
                   onClick={handleExploreProducts}
-                  className="bg-green-600 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-gray-900 border-2 border-green-600 transition-all duration-300 flex items-center group"
+                  className="bg-green-600 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-gray-900 border-2 border-green-600 transition-all duration-300 flex items-center group cursor-pointer"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >

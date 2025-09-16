@@ -185,7 +185,7 @@ export default function FeaturesSection() {
               onClick={prevSlide}
               onMouseEnter={() => setIsAutoPlaying(false)}
               onMouseLeave={() => setIsAutoPlaying(true)}
-              className="absolute left-1 sm:left-2 md:left-4 lg:left-6 top-1/2 -translate-y-1/2 z-30 rounded-full bg-white shadow-lg p-1.5 sm:p-2 md:p-3 hover:bg-gray-100 transition-all duration-300"
+              className="absolute left-1 sm:left-2 md:left-4 lg:left-6 top-1/2 -translate-y-1/2 z-30 rounded-full bg-white shadow-lg p-1.5 sm:p-2 md:p-3 hover:bg-gray-100 transition-all duration-300 cursor-pointer"
             >
               <ChevronLeft className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-6 lg:h-6 text-gray-700" />
             </motion.button>
@@ -196,7 +196,7 @@ export default function FeaturesSection() {
               onClick={nextSlide}
               onMouseEnter={() => setIsAutoPlaying(false)}
               onMouseLeave={() => setIsAutoPlaying(true)}
-              className="absolute right-1 sm:right-2 md:right-4 lg:right-6 top-1/2 -translate-y-1/2 z-30 rounded-full bg-white shadow-lg p-1.5 sm:p-2 md:p-3 hover:bg-gray-100 transition-all duration-300"
+              className="absolute right-1 sm:right-2 md:right-4 lg:right-6 top-1/2 -translate-y-1/2 z-30 rounded-full bg-white shadow-lg p-1.5 sm:p-2 md:p-3 hover:bg-gray-100 transition-all duration-300 cursor-pointer"
             >
               <ChevronRight className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-6 lg:h-6 text-gray-700" />
             </motion.button>
@@ -313,13 +313,13 @@ export default function FeaturesSection() {
           <div className="flex justify-center mt-4 space-x-4">
             <button
               onClick={prevSlide}
-              className="px-4 py-2 text-sm font-medium text-gray-600 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors duration-200"
+              className="px-4 py-2 text-sm font-medium text-gray-600 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors duration-200 cursor-pointer"
             >
               Previous
             </button>
             <button
               onClick={nextSlide}
-              className="px-4 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg hover:bg-gray-800 transition-colors duration-200"
+              className="px-4 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg hover:bg-gray-800 transition-colors duration-200 cursor-pointer"
             >
               Next
             </button>

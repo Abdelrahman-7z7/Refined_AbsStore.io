@@ -202,7 +202,7 @@ const heroSlides: HeroSlide[] = [
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
           onClick={() => handleCtaClick(current.ctaLink)}
-          className="px-6 sm:px-8 py-2.5 sm:py-3 bg-white text-gray-900 font-semibold rounded-lg shadow-md hover:bg-gray-100 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white text-sm sm:text-base hover:scale-105 active:scale-95"
+          className="px-6 sm:px-8 py-2.5 sm:py-3 bg-white text-gray-900 font-semibold rounded-lg shadow-md hover:bg-gray-100 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white text-sm sm:text-base hover:scale-105 active:scale-95 cursor-pointer"
         >
           {current.ctaText}
         </motion.button>
@@ -211,7 +211,7 @@ const heroSlides: HeroSlide[] = [
       {/* Navigation Arrows - Hidden on mobile, visible on tablet and desktop */}
       <button
         onClick={goToPrevious}
-        className="hidden sm:flex absolute left-3 sm:left-6 top-1/2 transform -translate-y-1/2 bg-gray-800 bg-opacity-70 hover:bg-opacity-100 text-white p-2 sm:p-3 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white z-20 hover:scale-110 active:scale-95"
+        className="hidden sm:flex absolute left-3 sm:left-6 top-1/2 transform -translate-y-1/2 bg-gray-800 bg-opacity-70 hover:bg-opacity-100 text-white p-2 sm:p-3 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white z-20 hover:scale-110 active:scale-95 cursor-pointer"
         aria-label="Previous slide"
       >
         <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-6 sm:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -221,7 +221,7 @@ const heroSlides: HeroSlide[] = [
 
       <button
         onClick={goToNext}
-        className="hidden sm:flex absolute right-3 sm:right-6 top-1/2 transform -translate-y-1/2 bg-gray-800 bg-opacity-70 hover:bg-opacity-100 text-white p-2 sm:p-3 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white z-20 hover:scale-110 active:scale-95"
+        className="hidden sm:flex absolute right-3 sm:right-6 top-1/2 transform -translate-y-1/2 bg-gray-800 bg-opacity-70 hover:bg-opacity-100 text-white p-2 sm:p-3 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white z-20 hover:scale-110 active:scale-95 cursor-pointer"
         aria-label="Next slide"
       >
         <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-6 sm:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -235,7 +235,7 @@ const heroSlides: HeroSlide[] = [
           <button
             key={index}
             onClick={() => goToSlide(index)}
-            className={`w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full transition-all duration-300 border-2 touch-manipulation ${
+            className={`w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full transition-all duration-300 border-2 touch-manipulation cursor-pointer ${
               index === currentSlide 
                 ? 'bg-white border-white scale-125 shadow-lg' 
                 : 'bg-transparent border-white hover:bg-white hover:bg-opacity-50 active:bg-white active:bg-opacity-70'

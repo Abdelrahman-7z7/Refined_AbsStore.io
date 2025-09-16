@@ -113,13 +113,13 @@ const CartItem: React.FC<CartItemProps> = ({
                 
                 {/* Quantity Controls */}
                 <div className="flex items-center bg-gray-50 rounded-xl p-1">
-                  <motion.button
-                    onClick={() => handleQuantityChange(quantity - 1)}
-                    className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-white shadow-sm hover:bg-gray-100 flex items-center justify-center transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    disabled={quantity <= 1}
-                  >
+                       <motion.button
+                         onClick={() => handleQuantityChange(quantity - 1)}
+                         className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-white shadow-sm hover:bg-gray-100 flex items-center justify-center transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                         whileHover={{ scale: 1.1 }}
+                         whileTap={{ scale: 0.9 }}
+                         disabled={quantity <= 1}
+                       >
                     <svg className="w-3 h-3 sm:w-4 sm:h-4 text-secondary-gray" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" />
                     </svg>
@@ -136,13 +136,13 @@ const CartItem: React.FC<CartItemProps> = ({
                     />
                   </div>
                   
-                  <motion.button
-                    onClick={() => handleQuantityChange(quantity + 1)}
-                    className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-white shadow-sm hover:bg-gray-100 flex items-center justify-center transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    disabled={quantity >= 99}
-                  >
+                       <motion.button
+                         onClick={() => handleQuantityChange(quantity + 1)}
+                         className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-white shadow-sm hover:bg-gray-100 flex items-center justify-center transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                         whileHover={{ scale: 1.1 }}
+                         whileTap={{ scale: 0.9 }}
+                         disabled={quantity >= 99}
+                       >
                     <svg className="w-3 h-3 sm:w-4 sm:h-4 text-secondary-gray" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                     </svg>
@@ -150,12 +150,12 @@ const CartItem: React.FC<CartItemProps> = ({
                 </div>
                 
                 {/* Remove Button */}
-                <motion.button
-                  onClick={() => onRemove(id)}
-                  className="text-red-500 hover:text-red-700 hover:bg-red-50 px-3 py-2 rounded-xl transition-all duration-200 flex items-center text-xs sm:text-sm font-semibold group"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
+                     <motion.button
+                       onClick={() => onRemove(id)}
+                       className="text-red-500 hover:text-red-700 hover:bg-red-50 px-3 py-2 rounded-xl transition-all duration-200 flex items-center text-xs sm:text-sm font-semibold group cursor-pointer"
+                       whileHover={{ scale: 1.05 }}
+                       whileTap={{ scale: 0.95 }}
+                     >
                   <svg className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2 group-hover:rotate-12 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                   </svg>

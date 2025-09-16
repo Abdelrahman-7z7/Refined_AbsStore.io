@@ -62,12 +62,12 @@ const CartSummary: React.FC<CartSummaryProps> = ({ subtotal, onCheckout }) => {
         </div>
 
         {/* Checkout Button */}
-        <motion.button
-          onClick={onCheckout}
-          className="w-full bg-primary-green text-white py-3 sm:py-4 px-4 rounded-xl font-bold text-base sm:text-lg hover:bg-hover-green transition-all duration-300 mt-4 sm:mt-6 flex items-center justify-center shadow-lg hover:shadow-xl group"
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-        >
+             <motion.button
+               onClick={onCheckout}
+               className="w-full bg-primary-green text-white py-3 sm:py-4 px-4 rounded-xl font-bold text-base sm:text-lg hover:bg-hover-green transition-all duration-300 mt-4 sm:mt-6 flex items-center justify-center shadow-lg hover:shadow-xl group cursor-pointer"
+               whileHover={{ scale: 1.02 }}
+               whileTap={{ scale: 0.98 }}
+             >
           <svg className="w-4 h-4 sm:w-5 sm:h-5 mr-2 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
           </svg>

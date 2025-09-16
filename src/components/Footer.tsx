@@ -30,11 +30,25 @@ export default function Footer() {
 
   const handleLinkClick = (href: string) => {
     if (href.startsWith('#')) {
-      const element = document.querySelector(href);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+      // Check if we're on the home page
+      if (window.location.pathname === '/') {
+        // We're on home page, just scroll to section
+        const element = document.querySelector(href);
+        if (element) {
+          const navbar = document.querySelector('nav');
+          const navbarHeight = navbar ? navbar.offsetHeight : 100;
+          const elementPosition = element.getBoundingClientRect().top + window.pageYOffset - navbarHeight - 20;
+          window.scrollTo({
+            top: elementPosition,
+            behavior: 'smooth'
+          });
+        }
+      } else {
+        // We're on another page, navigate to home with hash
+        router.push(`/${href}`);
       }
     } else {
+      // Regular page navigation
       router.push(href);
     }
   };
@@ -115,7 +129,7 @@ export default function Footer() {
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.4, delay: 0.2 + index * 0.1 }}
                   viewport={{ once: true }}
-                  className="text-left text-gray-300 hover:text-[#369e62] transition-colors duration-300 relative group"
+                  className="text-left text-gray-300 hover:text-[#369e62] transition-colors duration-300 relative group cursor-pointer"
                   whileHover={{ x: 5 }}
                 >
                   <span className="relative">

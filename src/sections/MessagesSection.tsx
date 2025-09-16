@@ -137,7 +137,7 @@ export default function MessagesSection() {
                 <motion.button
                   type="submit"
                   disabled={isSubmitting}
-                  className="bg-[#369e62] text-white rounded-lg px-6 py-3 font-semibold hover:bg-[#2f8653] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed self-center"
+                  className="bg-[#369e62] text-white rounded-lg px-6 py-3 font-semibold hover:bg-[#2f8653] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed self-center cursor-pointer"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >

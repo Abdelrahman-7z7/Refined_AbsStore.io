@@ -83,12 +83,12 @@ export default function CartPage() {
                 <p className="text-secondary-gray mb-6 text-sm sm:text-base max-w-md mx-auto">
                   Looks like you haven&apos;t added any items to your cart yet. Start exploring our amazing products!
                 </p>
-                <motion.button
-                  onClick={() => router.push('/#products')}
-                  className="bg-primary-green text-white px-6 sm:px-8 py-3 rounded-lg font-semibold hover:bg-hover-green transition-all duration-300 text-sm sm:text-base shadow-lg hover:shadow-xl"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
+                     <motion.button
+                       onClick={() => router.push('/#products')}
+                       className="bg-primary-green text-white px-6 sm:px-8 py-3 rounded-lg font-semibold hover:bg-hover-green transition-all duration-300 text-sm sm:text-base shadow-lg hover:shadow-xl cursor-pointer"
+                       whileHover={{ scale: 1.05 }}
+                       whileTap={{ scale: 0.95 }}
+                     >
                   Start Shopping
                 </motion.button>
               </motion.div>
@@ -136,10 +136,10 @@ export default function CartPage() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="mt-8 sm:mt-10 text-center"
           >
-            <button
-              onClick={() => router.push('/#products')}
-              className="text-primary-green hover:text-hover-green font-semibold flex items-center justify-center mx-auto text-sm sm:text-base group transition-colors duration-300"
-            >
+                 <button
+                   onClick={() => router.push('/#products')}
+                   className="text-primary-green hover:text-hover-green font-semibold flex items-center justify-center mx-auto text-sm sm:text-base group transition-colors duration-300 cursor-pointer"
+                 >
               <svg className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
               </svg>

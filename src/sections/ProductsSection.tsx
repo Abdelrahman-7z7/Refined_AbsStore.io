@@ -290,7 +290,7 @@ const ProductsSection: React.FC = () => {
               <motion.button
                 key="show-more"
                 onClick={handleShowMore}
-                className="bg-gray-900 text-white px-8 py-3 rounded-lg font-medium hover:bg-gray-800 transition-all duration-300 flex items-center shadow-md hover:shadow-lg"
+                className="bg-gray-900 text-white px-8 py-3 rounded-lg font-medium hover:bg-gray-800 transition-all duration-300 flex items-center shadow-md hover:shadow-lg cursor-pointer"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 initial={{ opacity: 0 }}
@@ -307,7 +307,7 @@ const ProductsSection: React.FC = () => {
               <motion.button
                 key="show-less"
                 onClick={handleShowLess}
-                className="bg-gray-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-gray-700 transition-all duration-300 flex items-center shadow-md hover:shadow-lg"
+                className="bg-gray-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-gray-700 transition-all duration-300 flex items-center shadow-md hover:shadow-lg cursor-pointer"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 initial={{ opacity: 0 }}
@@ -372,7 +372,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, isExpanded, onToggle
             ) : (
               <motion.button
                 onClick={onAddToCart}
-                className="bg-white/90 hover:bg-white text-gray-800 hover:text-green-600 p-2 rounded-full shadow-lg"
+                className="bg-white/90 hover:bg-white text-gray-800 hover:text-green-600 p-2 rounded-full shadow-lg cursor-pointer"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 title="Add to Cart"
@@ -443,7 +443,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, isExpanded, onToggle
         {/* Toggle Button */}
         <motion.button
           onClick={onToggle}
-          className="w-full bg-green-600 text-white py-2 px-4 rounded-lg font-medium hover:bg-white hover:text-gray-900 border-2 border-green-600 transition-all duration-300 mt-auto"
+          className="w-full bg-green-600 text-white py-2 px-4 rounded-lg font-medium hover:bg-white hover:text-gray-900 border-2 border-green-600 transition-all duration-300 mt-auto cursor-pointer"
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >
@@ -521,7 +521,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, isExpanded, onToggle
                 <div className="flex space-x-2 pt-4">
                   <motion.button
                     onClick={onAddToCart}
-                    className={`flex-1 py-2 px-4 rounded-lg font-medium border-2 transition-all duration-300 ${
+                    className={`flex-1 py-2 px-4 rounded-lg font-medium border-2 transition-all duration-300 cursor-pointer ${
                       isInCart 
                         ? 'bg-green-100 text-green-700 border-green-300 hover:bg-green-200' 
                         : 'bg-green-600 text-white border-green-600 hover:bg-white hover:text-gray-900'
@@ -538,7 +538,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, isExpanded, onToggle
                     }
                   </motion.button>
                   <motion.button
-                    className="px-4 py-2 border-2 border-gray-300 text-gray hover:border-primary-green hover:text-primary-green rounded-lg transition-all duration-300"
+                    className="px-4 py-2 border-2 border-gray-300 text-gray hover:border-primary-green hover:text-primary-green rounded-lg transition-all duration-300 cursor-pointer"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
