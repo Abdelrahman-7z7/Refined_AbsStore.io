@@ -7,12 +7,26 @@ interface User {
   email: string;
   firstName: string;
   lastName: string;
+  phone?: string;
+  dateOfBirth?: string;
+  address?: {
+    street: string;
+    city: string;
+    state: string;
+    zipCode: string;
+    country: string;
+  };
+  preferences?: {
+    newsletter: boolean;
+    smsNotifications: boolean;
+    emailNotifications: boolean;
+  };
 }
 
 interface AuthContextType {
   user: User | null;
   isLoading: boolean;
-  login: (email: string, password: string) => Promise<boolean>;
+  login: (email: string) => Promise<boolean>;
   logout: () => void;
   register: (userData: {
     firstName: string;
@@ -35,7 +49,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (savedUser) {
         try {
           setUser(JSON.parse(savedUser));
-        } catch (error) {
+        } catch {
           localStorage.removeItem('user');
         }
       }
@@ -45,7 +59,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     checkAuth();
   }, []);
 
-  const login = async (email: string, password: string): Promise<boolean> => {
+  const login = async (email: string): Promise<boolean> => {
     setIsLoading(true);
     
     // Simulate API call
